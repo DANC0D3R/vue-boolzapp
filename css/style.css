@@ -125,7 +125,8 @@ main{
     position: relative;
     align-self: flex-start;
 
-    max-width: 300px;
+    min-width: 160px;
+    max-width: 350px;
     min-height: 50px;
     max-height: 800px;
 
