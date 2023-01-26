@@ -20,7 +20,7 @@
                 <!-- Sidebar -->
                 <div class="col-4" id="sidebar">
                     <!-- HEADER -->
-                    <header class="h-100px d-flex justify-content-between align-items-center p-2">
+                    <header class="h-100px d-flex justify-content-between align-items-center p-3">
                         <!-- Informazioni Utente -->
                         <div class="h-80px d-flex justify-content-between align-items-center" id="this-user-info">
                             <!-- Immagie -->
@@ -50,18 +50,59 @@
                     <!-- Contatti -->
                     <section id="contacts">
                         <!-- Barra di ricerca -->
-                        <div class="h-80px d-flex">
+                        <div class="h-60px d-flex border border-secondary-subtle">
                             <input type="text" placeholder="Cerca o inizia una nuova chat" class="w-100 px-3 m-2 rounded border-0">
                         </div>
                         <!-- Lista Chat -->
                         <div id="contact-list ofy-auto">
-
-                        </div>
+                            <div class="ofy-auto" id="contact-list">
+                                <div v-for="contact in contacts" :class="{ 'active': isActive}" class="h-100px border border-secondary-subtle d-flex align-items-center p-3">
+                                    <figure class="w-60px rounded rounded-circle overflow-hidden m-0">
+                                        <img :src="`img/avatar${contact.avatar}.jpg`" class="img-fluid" :alt="contact.name">
+                                    </figure>
+                                    <div class="h-100 ps-3">
+                                        <span class="d-block">{{contact.name}}</span>
+                                    </div>
+                                </div>
+                            </div>
                     </section>
                 </div>
                 <!-- Chat attiva -->
-                <div class="col-8 bg-secondary">
-
+                <div class="col-8 position-relative" id="chat-area">
+                    <header class="h-100px d-flex justify-content-between align-items-center p-3">
+                        <div class="h-80px d-flex justify-content-between align-items-center" id="user-info">
+                            <figure class="w-60px rounded rounded-circle overflow-hidden m-0">
+                                <img src="img/avatar_io.jpg" class="img-fluid" alt="ProPic">
+                            </figure>
+                            <div class="h-100 p-3">
+                                <span class="d-block">{{user.name}}</span>
+                                <span class="text-muted fw-light">Ultimo accesso oggi alle</span>
+                            </div>                    
+                        </div>
+                        <div class="d-flex align-items-center" id="user-tools">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <i class="fa-solid fa-paperclip"></i>                        
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </div>
+                    </header>
+                    <section class="h-100 d-flex flex-column" id="chat">
+                        <div class="message sent">
+                            <span>Hai portato a spasso il cane?</span>
+                            <span class="date">data</span>
+                        </div>
+                        <div class="message sent">
+                            <span>Ricordati di stendere i panni</span>
+                            <span class="date">data</span>
+                        </div>
+                        <div class="message">
+                            <span>Tutto fatto!</span>
+                            <span class="date">data</span>
+    
+                        </div>
+                    </section>
+                    <footer class="h-80px position-absolute bottom-0 start-0 end-0">
+    
+                    </footer>
                 </div>
             </div>
         </main>
