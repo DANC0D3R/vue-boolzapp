@@ -57,9 +57,9 @@
                         <div id="contact-list ofy-auto">
                             <div class="ofy-auto" id="contact-list">
                                 <div v-for="contact in contacts" :class="{ 'active': isActive}" class="h-100px border border-secondary-subtle d-flex align-items-center p-3">
-                                    <figure class="w-60px rounded rounded-circle overflow-hidden m-0">
+                                    <div class="w-60px rounded rounded-circle overflow-hidden m-0">
                                         <img :src="`img/avatar${contact.avatar}.jpg`" class="img-fluid" :alt="contact.name">
-                                    </figure>
+                                    </div>
                                     <div class="h-100 ps-3">
                                         <span class="d-block">{{contact.name}}</span>
                                     </div>
@@ -71,9 +71,9 @@
                 <div class="col-8 position-relative" id="chat-area">
                     <header class="h-100px d-flex justify-content-between align-items-center p-3">
                         <div class="h-80px d-flex justify-content-between align-items-center" id="user-info">
-                            <figure class="w-60px rounded rounded-circle overflow-hidden m-0">
+                            <div class="w-60px rounded rounded-circle overflow-hidden m-0">
                                 <img src="img/avatar_io.jpg" class="img-fluid" alt="ProPic">
-                            </figure>
+                            </div>
                             <div class="h-100 p-3">
                                 <span class="d-block">{{user.name}}</span>
                                 <span class="text-muted fw-light">Ultimo accesso oggi alle</span>
@@ -100,7 +100,12 @@
     
                         </div>
                     </section>
-                    <footer class="h-80px position-absolute bottom-0 start-0 end-0">
+                    <footer class="h-60px d-flex align-items-center py-3 position-absolute bottom-0 start-0 end-0">
+                        <i class="fa-regular fa-face-smile col-1 text-center"></i>
+                        <div class="flex-grow-1">
+                            <input type="text" placeholder="Scrivi un messaggio" class="w-100 px-3 rounded border-0">
+                        </div>
+                        <i class="fa-solid fa-microphone col-1 text-center"></i>
     
                     </footer>
                 </div>

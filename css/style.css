@@ -88,6 +88,8 @@ main{
 /* Lista Chat */
 #contact-list{
     height: calc(888px - 260px);
+
+    cursor: pointer;
 }
 
 #contact-list > *.active{
@@ -102,10 +104,23 @@ main{
 }
 
 #chat-area footer{
+    font-size: 20px;
+
+    color: #76706b;
     background-color: #f3eeea;
+    
+    cursor: pointer;
 }
 
-/* Messaggi */
+#chat-area footer i{
+    font-size: 25px;
+}
+
+#chat-area footer input{
+    height: 40px;
+}
+
+/* Messaggi */  
 .message{
     position: relative;
     align-self: flex-start;
@@ -120,6 +135,8 @@ main{
     border-radius: 17px 17px 17px 3px;
 
     background-color: #FDFDFD;
+
+    cursor: default;
 }
 
 .message.sent{
