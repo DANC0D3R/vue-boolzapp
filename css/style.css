@@ -98,16 +98,18 @@ main{
 
 /* Chat Attiva */
 #chat-area #chat{
-    background-image: url("../img/mine.jpg");    
-    height: 100px;
+    height: calc(888px - 180px);
+
     padding: 40px 80px;
+
+    background-image: url("../img/mine.jpg");    
 }
 
 #chat-area footer{
-    font-size: 20px;
+    font-size: 17px;
 
     color: #76706b;
-    background-color: #f3eeea;
+    background-color: #F3EEEA;
     
     cursor: pointer;
 }
