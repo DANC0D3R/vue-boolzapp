@@ -129,7 +129,7 @@ main{
 
     min-width: 160px;
     max-width: 350px;
-    min-height: 50px;
+    min-height: 60px;
     max-height: 800px;
 
     margin-bottom: 20px;
@@ -140,6 +140,11 @@ main{
     background-color: #FDFDFD;
 
     cursor: default;
+}
+
+.message .text{
+    width: 100%;
+    min-height: 10px;
 }
 
 .message.sent{

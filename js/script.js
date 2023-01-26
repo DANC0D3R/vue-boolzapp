@@ -5,8 +5,9 @@ const { createApp } = Vue
 createApp({
     data(){
         return{
+            searchTerm:'',
             newMessage:{
-                date: this.getCurrentTime(),
+                date: '',
                 message: '',
                 status: 'sent'
             },
@@ -183,16 +184,16 @@ createApp({
         },
         currentChat(){
             return this.currentContact.messages
+        },
+        currentTime(){
+            return dt.now().toLocaleString(dt.DATETIME_MED)
         }
     },
     methods: {
-        getCurrentTime(){
-            return dt.now().toLocaleString(dt.DATETIME_MED)
-        },
         sendNewMessage(){
             this.currentChat.push(this.newMessage)
             this.newMessage = {
-                date: this.getCurrentTime(),
+                date: '',
                 message: '',
                 status: 'sent'
             }
@@ -200,13 +201,13 @@ createApp({
         receiveNewMessage(){
             setTimeout(() => {
                 this.newMessage = {
-                date: this.getCurrentTime(),
+                date: this.currentTime,
                 message: 'Ok',
                 status: 'received'
                 }
                 this.currentChat.push(this.newMessage)
                 this.newMessage = {
-                date: this.getCurrentTime(),
+                date: this.currentTime,
                 message: '',
                 status: 'sent'
                 }
@@ -217,6 +218,16 @@ createApp({
                 this.sendNewMessage()
                 this.receiveNewMessage()
             }
+        },
+        filterContacts(){
+            this.contacts.filter(currentContact => {
+                if(!currentContact.name.toLowerCase().includes(this.searchTerm.trim())){
+                currentContact.visible = false
+                }
+                if(this.searchTerm === ''){
+                currentContact.visible = true
+                }
+            })
         }
     }, 
 }).mount('#app');
