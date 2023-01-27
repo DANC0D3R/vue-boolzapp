@@ -232,5 +232,13 @@ createApp({
                 }
             })
         },
+        // Funzioni del dropdown
+        deleteMessage(message){
+            const index = this.currentChat.indexOf(message)
+            this.currentChat.splice(index, 1)
+        },
+        alertInfo(){
+            alert('Mi dispiace, quel pulsante è finto. Non ho informazioni da mostrarti')
+        }
     }, 
 }).mount('#app');

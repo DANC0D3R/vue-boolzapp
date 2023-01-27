@@ -98,9 +98,10 @@ main{
 
 /* Chat Attiva */
 #chat-area #chat{
-    height: calc(888px - 180px);
+    max-height: 100%;
+    height: calc(888px - 190px);
 
-    padding: 40px 80px;
+    padding: 30px 80px 10px 80px;
 
     background-image: url("../img/mine.jpg");    
 }
@@ -175,4 +176,8 @@ main{
 
 .message:hover .dropdown{
     opacity: 1;
+}
+
+footer{
+    height: 70px;
 }
