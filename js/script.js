@@ -224,7 +224,7 @@ createApp({
         // Ricerca nella lista contatti
         filterContacts(){
             this.contacts.filter(currentContact => {
-                if(!currentContact.name.toLowerCase().includes(this.searchTerm.trim())){
+                if(!currentContact.name.includes(this.searchTerm.trim())){
                 currentContact.visible = false
                 }
                 if(this.searchTerm === ''){
