@@ -7,7 +7,7 @@ createApp({
         return{
             searchTerm:'',
             newMessage:{
-                date: '',
+                date: dt.now().toLocaleString(dt.DATETIME_MED),
                 message: '',
                 status: 'sent'
             },
@@ -185,9 +185,6 @@ createApp({
         currentChat(){
             return this.currentContact.messages
         },
-        currentTime(){
-            return dt.now().toLocaleString(dt.DATETIME_MED)
-        }
     },
     methods: {
         sendNewMessage(){
@@ -201,13 +198,13 @@ createApp({
         receiveNewMessage(){
             setTimeout(() => {
                 this.newMessage = {
-                date: this.currentTime,
+                date: dt.now().toLocaleString(dt.DATETIME_MED),
                 message: 'Ok',
                 status: 'received'
                 }
                 this.currentChat.push(this.newMessage)
                 this.newMessage = {
-                date: this.currentTime,
+                date: dt.now().toLocaleString(dt.DATETIME_MED),
                 message: '',
                 status: 'sent'
                 }
