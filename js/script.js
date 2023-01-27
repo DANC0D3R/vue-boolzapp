@@ -185,8 +185,12 @@ createApp({
         currentChat(){
             return this.currentContact.messages
         },
+        currentTime(){
+            return dt.now().toLocaleString(dt.DATETIME_MED)
+        }
     },
     methods: {
+        // Invia nuovo messaggio (utente)
         sendNewMessage(){
             this.currentChat.push(this.newMessage)
             this.newMessage = {
@@ -195,6 +199,7 @@ createApp({
                 status: 'sent'
             }
         },
+        // Invia nuovo messaggio (ricevuto)
         receiveNewMessage(){
             setTimeout(() => {
                 this.newMessage = {
@@ -216,6 +221,7 @@ createApp({
                 this.receiveNewMessage()
             }
         },
+        // Ricerca nella lista contatti
         filterContacts(){
             this.contacts.filter(currentContact => {
                 if(!currentContact.name.toLowerCase().includes(this.searchTerm.trim())){
@@ -225,6 +231,6 @@ createApp({
                 currentContact.visible = true
                 }
             })
-        }
+        },
     }, 
 }).mount('#app');
