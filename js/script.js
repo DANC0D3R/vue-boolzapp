@@ -227,8 +227,8 @@ createApp({
                 if(!currentContact.name.toLowerCase().includes(this.searchTerm.toLowerCase())){
                     currentContact.visible = false
                 }
-                if(this.searchTerm === ''){
-                currentContact.visible = true
+                else{
+                    currentContact.visible = true
                 }
             })
         },
