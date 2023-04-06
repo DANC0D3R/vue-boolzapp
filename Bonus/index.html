@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="name" content="Daniele Minieri">
+        <title>Boolzapp</title>
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="img/boolzapp-logo.png">
+
+        <!-- Stile -->
+        <link rel="stylesheet" href="css/style.css">
+        <!-- Fontawesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!-- Bootsrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">    
+    </head>
+    <body>
+        <main class="rounded overflow-hidden" id="app">
+            <div class="d-flex h-100">
+                <!-- Sidebar -->
+                <div class="col-4" id="sidebar">
+                    <!-- HEADER -->
+                    <header class="h-100px d-flex justify-content-between align-items-center p-3">
+                        <!-- Informazioni Utente -->
+                        <div class="h-80px d-flex justify-content-between align-items-center" id="this-user-info">
+                            <!-- Immagie -->
+                            <div class="w-60px rounded rounded-circle overflow-hidden m-0">
+                                <img :src="`img/avatar${user.avatar}.jpg`" class="img-fluid" alt="profile picture">
+                            </div>
+                            <!-- Nome Utente -->
+                            <div class="ms-2">{{user.name}}</div>
+                        </div>
+                        <!-- User Tools -->
+                        <div class="d-flex align-items-center" id="user-tools">
+                            <i class="fa-solid fa-circle-notch"></i>
+                            <i class="fa-solid fa-message"></i>
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </div>
+                    </header>
+                    <!-- Notifiche -->
+                    <section class="h-100px d-flex align-items-center p-3" id="notifications">
+                        <div class="bg-light w-60px h-60px rounded rounded-circle d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-bell-slash"></i>
+                        </div>
+                        <div class="ps-3">
+                            <p class="m-0">Ricevi notifiche di nuovi messaggi.</p>
+                            <a href="#">Attiva notifiche desktop</a>
+                        </div>
+                    </section>
+                    <!-- Contatti -->
+                    <section id="contacts">
+                        <!-- Barra di ricerca -->
+                        <div class="h-60px d-flex border border-secondary-subtle">
+                            <input type="text" v-model="searchTerm" @keyup="filterContacts" placeholder="Cerca o inizia una nuova chat" class="w-100 px-3 m-2 rounded border-0">
+                        </div>
+                        <!-- Lista Chat -->
+                        <div id="contact-list ofy-auto">
+                            <div class="ofy-auto" id="contact-list">
+                                <div v-for="(contact, i) in contacts" @click="currentIndex = i" :class="{ 'active': currentIndex === i}, {'d-none': contact.visible === false}  " class="h-100px border border-secondary-subtle d-flex align-items-center p-3">
+                                    <div class="w-60px rounded rounded-circle overflow-hidden m-0">
+                                        <img :src="`img/avatar${contact.avatar}.jpg`" class="img-fluid" :alt="contact.name">
+                                    </div>
+                                    <div class="h-100 ps-3">
+                                        <span class="d-block">{{contact.name}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                    </section>
+                </div>
+                <!-- Sezionehat mostrata -->
+                <div class="col-8 position-relative" id="chat-area">
+                    <!-- Info contatto mostrato -->
+                    <header class="h-100px d-flex justify-content-between align-items-center p-3">
+                        <div class="h-80px d-flex justify-content-between align-items-center" id="user-info">
+                            <div class="w-60px rounded rounded-circle overflow-hidden m-0">
+                                <img :src="`img/avatar${currentContact.avatar}.jpg`" class="img-fluid" alt="profile picture">
+                            </div>
+                            <div class="h-100 p-3">
+                                <span class="d-block">{{currentContact.name}}</span>
+                                <span class="text-muted fw-light">Ultimo accesso: {{currentTime}}</span>
+                            </div>                    
+                        </div>
+                        <div class="d-flex align-items-center" id="user-tools">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <i class="fa-solid fa-paperclip"></i>                        
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </div>
+                    </header>
+                    <!-- Introduzione -->
+                    <section>
+                        <div class="intro d-flex flex-column justify-content-center">
+                            <img src="img/boolzapp-logo.png" alt="logo">
+                            <h2>BoolzApp</h2>
+                            <p>Clicca su una chat per visualizzare i messaggi</p>
+                        </div>
+                    </section>
+                    <!-- Chat mostrata -->
+                    <section class="ofy-auto d-flex flex-column" id="chat">
+                        <div v-for="message in currentChat" :class="{'sent' : message.status === 'sent'}" class="message">
+                            <div class="d-flex justify-content-between">
+                                <span class="text">{{message.message}}</span>
+                                <div class="dropdown ms-2" v-if="message.status === 'sent'">
+                                    <button class="border-0 bg-transparent" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-angle-down"></i>                                
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><span @click="alertInfo" class="dropdown-item">Info messaggio</span></li>
+                                        <li><span @click="deleteMessage(message)" class="dropdown-item">Cancella messaggio</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <span class="date">{{message.date}}</span>
+                    </section>
+                    <footer class="h-80px d-flex align-items-center py-3 position-absolute bottom-0 start-0 end-0">
+                        <i class="fa-regular fa-face-smile col-1 text-center"></i>
+                        <div class="flex-grow-1">
+                            <input type="text" v-model="newMessage.message" @keyup.enter="sendAndReceive" placeholder="Scrivi un messaggio" class="w-100 px-3 rounded border-0">
+                        </div>
+                        <i class="fa-solid fa-microphone col-1 text-center"></i>
+                    </footer>
+                </div>
+            </div>
+        </main>
+        <!-- Dropdown -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+        <!-- Vuejs -->
+        <script src='https://unpkg.com/vue@3/dist/vue.global.js'></script>
+        <!-- Luxon -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.2.1/luxon.min.js" integrity="sha512-pyR2hpC7bLig9Ub4eUIOC/BAO4anpdt7jhpF4dfrPv+qIg+KWztdVjFPCRCsRaWVfUylUCvrrxqMFNrJBdQIjQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!-- Script -->
+        <script type="text/javascript" src="js/script.js"></script>
+    </body>
+</html>

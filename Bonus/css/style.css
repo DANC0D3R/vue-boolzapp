@@ -1,0 +1,206 @@
+/* RESET */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* UTILITY */
+
+.h-100px{
+    height: 100px;
+}
+
+.h-80px{
+    height: 80px;
+}
+
+.h-60px{
+    height: 60px;
+}
+
+.w-80px{
+    width: 80px;
+}
+
+.w-60px{
+    width: 60px;
+}
+
+.ofy-auto{
+    overflow-y: auto;
+}
+
+/* REGOLE GENERALI */
+
+body{
+    height: 100vh;
+
+    background: linear-gradient(to bottom, #009688 0 17%, #DADBD3 15% 100%);
+
+    overflow: hidden;
+}
+
+main{
+    width: 1200px;
+    height: calc(100vh - 60px);
+
+    margin: 30px auto;
+    padding: 0;
+
+    background-color: #F5F5F5;
+}
+
+#header{
+    background-color: #EAEAEA;
+}
+
+#user-tools *{
+    margin: 0 10px;
+    padding: 5px;
+    
+    font-size: 25px;
+
+    color: #818181;
+
+    cursor: pointer;
+}
+
+#user-tools *:hover{
+    color: #009688;
+}
+
+/* Notifiche */
+#notifications{
+    background-color: #8EDAFC;
+}
+
+#notifications i{
+    font-size: 30px;
+
+    color: #8EDAFC;
+}
+
+#notifications a{
+    font-size: 14px;
+
+    color: #808080;
+
+    cursor: pointer;
+}
+
+/* Lista Chat */
+#contact-list{
+    height: calc(888px - 260px);
+
+    cursor: pointer;
+}
+
+#contact-list > *.active{
+    background-color: #D2D2D2;
+}
+
+/* Introduzione */
+.intro{
+    max-height: 100%;
+    height: calc(888px - 190px);
+
+    padding: 10rem;
+}
+
+.intro img{
+    width: 6rem;
+
+    margin: 0 auto;
+}
+
+.intro h2, p{
+    text-align: center;
+}
+
+/* Chat Attiva */
+#chat-area #chat{
+    max-height: 100%;
+    height: calc(888px - 190px);
+
+    padding: 30px 80px 10px 80px;
+
+    background-image: url("../img/mine.jpg");    
+}
+
+#chat-area footer{
+    font-size: 17px;
+
+    color: #76706b;
+    background-color: #F3EEEA;
+    
+    cursor: pointer;
+}
+
+#chat-area footer i{
+    font-size: 25px;
+}
+
+#chat-area footer input{
+    height: 40px;
+}
+
+/* Messaggi */  
+.message{
+    position: relative;
+    align-self: flex-start;
+
+    min-width: 160px;
+    max-width: 350px;
+    min-height: 60px;
+    max-height: 800px;
+
+    margin-bottom: 20px;
+    padding: 10px 15px 25px 15px;
+
+    border-radius: 17px 17px 17px 3px;
+
+    background-color: #FDFDFD;
+
+    cursor: default;
+}
+
+.message .text{
+    width: 100%;
+    min-height: 10px;
+}
+
+.message.sent{
+    align-self: flex-end;
+
+    border-radius: 17px 17px 3px 17px;
+
+    background-color: #D5F9BA;
+}
+
+.message .date{
+    position: absolute;
+    bottom: 8px;
+    right: 15px;
+
+    text-align: right;
+    font-size: 12px;
+
+    color: #808080;
+}
+
+/* Dropdown */
+.dropdown{
+    opacity: 0;
+
+    transition: all 0.15s;
+}
+
+.message:hover .dropdown{
+    opacity: 1;
+}
+
+footer{
+    height: 70px;
+}
